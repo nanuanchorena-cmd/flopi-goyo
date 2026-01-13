@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Regalos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --text: #2b2b2b;
+      --muted: #777;
+      --accent: #d6a6a1;
+      --accent-soft: #f3e2df;
+      --card: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin: 100px 0 20px;
+      font-size: 2.8rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* FILTERS */
+    .filters {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .filters button {
+      border: none;
+      background: #eee;
+      padding: 10px 22px;
+      margin: 6px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .9rem;
+    }
+
+    .filters button.active {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    /* GRID */
+    .grid {
+      max-width: 1200px;
+      margin: 0 auto 120px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .price {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .card button {
+      margin-top: auto;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      background: var(--accent-soft);
+      cursor: pointer;
+      font-size: .95rem;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      width: 95%;
+      max-width: 520px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .modal-content {
+      padding: 24px;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 10px;
+    }
+
+    .modal-price {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .bank-box {
+      background: #f6f6f6;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .cancel {
+      background: #eee;
+    }
+
+    .confirm {
+      background: var(--accent);
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Lista de Regalos</h1>
+<p class="subtitle">
+  Gracias por querer ser parte de nuestro comienzo.  
+  Acá encontrarás diferentes opciones para ayudarnos a construir nuestro hogar y disfrutar de nuestra luna de miel.
+</p>
+
+<div class="filters">
+  <button class="active" onclick="filterCat('all', this)">Todos los regalos</button>
+  <button onclick="filterCat('Hogar', this)">Hogar</button>
+  <button onclick="filterCat('Luna de Miel', this)">Luna de Miel</button>
+  <button onclick="filterCat('Experiencias', this)">Experiencias</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-content">
+      <img id="modalImg">
+      <h3 id="modalTitle"></h3>
+      <div class="modal-price" id="modalPrice"></div>
+
+      <div class="bank-box">
+        <strong>Cuenta en ARS</strong><br>
+        Alias: flopi.goyoo.boda<br>
+        Banco: XXXX
+      </div>
+
+      <div class="bank-box">
+        <strong>Cuenta en USD</strong><br>
+        Alias: flopi.goyo.usd<br>
+        Banco: XXXX
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel" onclick="closeModal()">Cancelar</button>
+      <button class="confirm" onclick="confirmGift()">Confirmar regalo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlgOl6z03yvVVdRTEDSDhKCOlO4axbcB02j9_0Y4uNKby_SCov9mViZORrqBO7diQ_E79EGcxvo-oA/pub?output=csv";
+
+const GOOGLE_FORM_URL = "PEGAR_ACA_TU_GOOGLE_FORM";
+
+let items = [];
+
+Papa.parse(SHEET_URL, {
+  download: true,
+  header: true,
+  complete: res => {
+    items = res.data.filter(i => i.Producto);
+    render(items);
+  }
+});
+
+function render(list) {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  list.forEach(i => {
+    grid.innerHTML += `
+      <div class="card">
+        <img src="images/${i.Foto}">
+        <div class="card-content">
+          <h3>${i.Producto}</h3>
+          <div class="price">${i.Precio}</div>
+          <button onclick='openModal(${JSON.stringify(i)})'>Regalar</button>
+        </div>
+      </div>`;
+  });
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  render(cat === "all" ? items : items.filter(i => i.Categoria === cat));
+}
+
+function openModal(item) {
+  document.getElementById("modalImg").src = "images/" + item.Foto;
+  document.getElementById("modalTitle").innerText = item.Producto;
+  document.getElementById("modalPrice").innerText = item.Precio;
+  document.getElementById("modal").classList.add("active");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("active");
+}
+
+function confirmGift() {
+  window.open(GOOGLE_FORM_URL, "_blank");
+}
+</script>
+
+</body>
+</html>
