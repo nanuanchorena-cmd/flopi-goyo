@@ -66,7 +66,12 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:24px;
+    }
+
+    .icon img{
+      width:28px;
+      height:28px;
+      object-fit:contain;
     }
 
     /* ===== CARDS ===== */
@@ -157,8 +162,11 @@
   <!-- CEREMONIA / FIESTA -->
   <section class="first-section">
     <div class="cards">
+
       <div class="card">
-        <div class="icon">⛪</div>
+        <div class="icon">
+          <img src="images/Floyo%20Web-07.jpg" alt="Ceremonia">
+        </div>
         <h3>Ceremonia</h3>
         <p>
           Santa Rita, Boulogne<br>
@@ -171,7 +179,9 @@
       </div>
 
       <div class="card">
-        <div class="icon">🍾</div>
+        <div class="icon">
+          <img src="images/Floyo%20Web-05.jpg" alt="Fiesta">
+        </div>
         <h3>Fiesta</h3>
         <p>
           Las Cortaderas, Tigre<br>
@@ -182,13 +192,16 @@
           Ver ubicación
         </a>
       </div>
+
     </div>
   </section>
 
   <!-- RSVP -->
   <section>
     <div class="cta">
-      <div class="icon">🔒</div>
+      <div class="icon">
+        <img src="images/Floyo%20Web-08.jpg" alt="RSVP">
+      </div>
       <h3 style="font-family:'Pacifico', cursive;">RSVP</h3>
       <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfL6H8sjPBOcxHk3zhMHj9iaTm5v9VEZv3AKKNAw7TRZ0kFKg/viewform" target="_blank">
         Confirmar asistencia
@@ -196,10 +209,27 @@
     </div>
   </section>
 
+  <!-- INFO TRÁFICO -->
+  <section>
+    <div class="cta">
+      <div class="icon">
+        <img src="images/Floyo%20Web-06.jpg" alt="Información de tráfico">
+      </div>
+      <p>
+        Acuérdense que ese día hay <strong>Lollapalooza</strong>, tenganlo en cuenta por el tráfico.<br><br>
+        El mejor camino para ir a Las Cortaderas desde Santa Rita es:
+        <strong>Panamericana Ramal Escobar / Zárate</strong> y luego salir en
+        <strong>Ruta 27 (Av. Benavidez)</strong> hasta el fondo.
+      </p>
+    </div>
+  </section>
+
   <!-- REGALOS -->
   <section>
     <div class="cta">
-      <div class="icon">🎁</div>
+      <div class="icon">
+        <img src="images/Floyo%20Web-09.jpg" alt="Regalos">
+      </div>
       <h3 style="font-family:'Pacifico', cursive;">Regalos</h3>
       <a class="btn" href="regalos.html">
         Ver lista de regalos
