@@ -17,11 +17,11 @@
 
   <style>
     :root{
-      --bg:#95c9e1;            /* celeste */
-      --card:#f8f5ec;          /* blanco */
-      --text:#322c2c;          /* negro */
+      --bg:#95c9e1;
+      --card:#f8f5ec;
+      --text:#322c2c;
       --muted:#6f6f6f;
-      --accent:#f28aa3;        /* rosa (igual) */
+      --accent:#f28aa3;
       --accent-soft:#fde4ec;
       --radius:22px;
       --shadow:0 18px 40px rgba(0,0,0,.08);
@@ -42,40 +42,18 @@
       padding:48px 20px;
     }
 
-    /* ===== TIPOGRAFÍA INVITACIÓN ===== */
-    .script{
-      font-family:'Pacifico', cursive;
-      font-weight:400;
+    /* ===== HERO ===== */
+    .hero{
+      max-width:1100px;
+      margin:60px auto 20px;
+      padding:0 20px;
     }
 
-    /* ===== HEADER ===== */
-    .names{
-      font-size:3.2rem;
-      margin-top:60px;
-      color:var(--text);
-    }
-
-    .names .amp{
-      color:var(--accent);
-    }
-
-    .nos{
-      color:var(--accent);
-      font-size:2.4rem;
-      margin-top:10px;
-    }
-
-    .date{
-      font-size:2.4rem;
-      margin-top:4px;
-      color:var(--text);
-    }
-
-    /* ===== TITULOS ===== */
-    h2{
-      color:var(--accent);
-      font-size:2.1rem;
-      margin-bottom:34px;
+    .hero img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:22px;
     }
 
     /* ===== ICONOS ===== */
@@ -106,8 +84,9 @@
     }
 
     .card h3{
-      font-size:1.05rem;
-      font-weight:500;
+      font-family:'Pacifico', cursive;
+      font-size:1.2rem;
+      font-weight:400;
       margin-bottom:6px;
     }
 
@@ -155,34 +134,34 @@
       color:var(--text);
     }
 
+    /* ===== AJUSTE ESPACIO SOLO PRIMER BLOQUE ===== */
+    .first-section{
+      padding-top:24px;
+    }
+
     @media(max-width:600px){
-      .names{font-size:2.6rem;}
-      .nos,.date{font-size:2rem;}
       section{padding:36px 16px;}
+      .hero{margin-top:40px;}
+      .first-section{padding-top:16px;}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <div class="names script">
-    Flopi <span class="amp">&amp;</span> Goyo
+  <!-- HERO -->
+  <div class="hero">
+    <img src="/images/hero-flopi-goyo.jpg" alt="Flopi y Goyo - Nos casamos">
   </div>
 
-  <div class="nos script">¡Nos casamos!</div>
-  <div class="date script">14.03.26</div>
-
-  <!-- DONDE Y CUANDO -->
-  <section>
-    <h2 class="script">Dónde y cuándo</h2>
-
+  <!-- CEREMONIA / FIESTA -->
+  <section class="first-section">
     <div class="cards">
       <div class="card">
         <div class="icon">⛪</div>
-        <h3 class="script">Ceremonia</h3>
+        <h3>Ceremonia</h3>
         <p>
-          Santa Rita, Bulogne<br>
+          Santa Rita, Boulogne<br>
           <strong>16:30 hs</strong>
         </p>
         <a class="btn-outline" target="_blank"
@@ -193,10 +172,10 @@
 
       <div class="card">
         <div class="icon">🍾</div>
-        <h3 class="script">Fiesta</h3>
+        <h3>Fiesta</h3>
         <p>
           Las Cortaderas, Tigre<br>
-          <strong>18:30 hs</strong>
+          <strong>18:00 hs</strong>
         </p>
         <a class="btn-outline" target="_blank"
            href="https://www.google.com/maps?daddr=J.+M.+Loreto+4600,+Dique+Luján,+Buenos+Aires">
@@ -210,7 +189,7 @@
   <section>
     <div class="cta">
       <div class="icon">🔒</div>
-      <h3 class="script">RSVP</h3>
+      <h3 style="font-family:'Pacifico', cursive;">RSVP</h3>
       <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfL6H8sjPBOcxHk3zhMHj9iaTm5v9VEZv3AKKNAw7TRZ0kFKg/viewform" target="_blank">
         Confirmar asistencia
       </a>
@@ -221,7 +200,7 @@
   <section>
     <div class="cta">
       <div class="icon">🎁</div>
-      <h3 class="script">Regalos</h3>
+      <h3 style="font-family:'Pacifico', cursive;">Regalos</h3>
       <a class="btn" href="regalos.html">
         Ver lista de regalos
       </a>
