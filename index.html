@@ -5,20 +5,26 @@
   <title>Flopi & Goyo — ¡Nos casamos!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Tipografías (NO TOCADAS) -->
+  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Texto base -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Cursiva tipo invitación -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#a8d6e8;
-      --card:#fffaf3;
+      --bg:#a9d7e8;
+      --card:#fff9f3;
       --text:#2b2b2b;
-      --accent:#f28da0;
-      --shadow:0 18px 45px rgba(0,0,0,.08);
+      --muted:#6f6f6f;
+      --accent:#f28aa3;
+      --accent-soft:#fde4ec;
       --radius:22px;
+      --shadow:0 18px 40px rgba(0,0,0,.08);
     }
 
     *{box-sizing:border-box;margin:0;padding:0;}
@@ -27,69 +33,65 @@
       font-family:'Inter',sans-serif;
       background:var(--bg);
       color:var(--text);
-      line-height:1.6;
+      text-align:center;
     }
 
     section{
       max-width:900px;
       margin:0 auto;
-      padding:40px 20px; /* 🔧 espacios achicados */
-      text-align:center;
+      padding:48px 20px;
     }
 
-    /* ===== TITULOS ===== */
+    /* ===== TIPOGRAFÍA INVITACIÓN (SOLO DONDE VA) ===== */
+    .script{
+      font-family:'Pacifico', cursive;
+      font-weight:400;
+    }
 
+    /* ===== HEADER ===== */
     .names{
-      font-family:'Playfair Display',serif;
-      font-size:3rem;
+      font-size:3.2rem;
+      margin-top:60px;
       color:#000;
-      margin-top:30px;
     }
 
-    .nos-casamos{
-      font-family:'Pacifico',cursive;
+    .names .amp{
       color:var(--accent);
-      font-size:2.3rem;
-      margin-top:6px;
+    }
+
+    .nos{
+      color:var(--accent);
+      font-size:2.4rem;
+      margin-top:10px;
     }
 
     .date{
-      font-family:'Pacifico',cursive;
-      font-size:2.1rem;
+      font-size:2.4rem;
+      margin-top:4px;
       color:#000;
-      margin-top:2px;
     }
 
+    /* ===== TITULOS ===== */
     h2{
-      font-family:'Pacifico',cursive;
       color:var(--accent);
-      font-size:2.2rem;
-      margin-bottom:30px;
+      font-size:2.1rem;
+      margin-bottom:34px;
     }
 
     /* ===== ICONOS ===== */
-
     .icon{
-      width:42px;
-      height:42px;
+      width:54px;
+      height:54px;
+      margin:0 auto 16px;
       border-radius:50%;
-      background:rgba(242,141,160,.2);
+      background:var(--accent-soft);
       display:flex;
       align-items:center;
       justify-content:center;
-      margin:0 auto 14px;
-    }
-
-    .icon svg{
-      width:20px;
-      height:20px;
-      stroke:var(--accent);
-      fill:none;
-      stroke-width:1.8;
+      font-size:24px;
     }
 
     /* ===== CARDS ===== */
-
     .cards{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -99,163 +101,137 @@
     .card{
       background:var(--card);
       border-radius:var(--radius);
+      padding:34px 26px;
       box-shadow:var(--shadow);
-      padding:36px 26px;
     }
 
     .card h3{
-      font-family:'Playfair Display',serif;
-      font-size:1.4rem;
+      font-family:'Inter',sans-serif;
+      font-size:1.05rem;
+      font-weight:500;
       margin-bottom:6px;
     }
 
     .card p{
+      color:var(--muted);
       font-size:.95rem;
-      margin-bottom:16px;
+      line-height:1.6;
     }
 
     .btn-outline{
       display:inline-block;
-      padding:9px 22px;
-      border-radius:999px;
-      border:1px solid var(--accent);
+      margin-top:18px;
+      padding:10px 22px;
+      border-radius:30px;
+      border:1.5px solid var(--accent);
       color:var(--accent);
       text-decoration:none;
-      font-size:.85rem;
+      font-size:.9rem;
     }
 
     /* ===== CTA ===== */
-
     .cta{
       background:var(--card);
-      border-radius:28px;
+      border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:40px 30px;
-      margin-bottom:26px;
+      padding:42px 26px;
+      max-width:760px;
+      margin:0 auto;
     }
 
-    .cta h3{
-      font-family:'Playfair Display',serif;
-      font-size:1.45rem;
-      margin-bottom:14px;
-    }
-
-    .cta a{
+    .btn{
       display:inline-block;
+      margin-top:18px;
+      padding:12px 30px;
+      border-radius:30px;
       background:var(--accent);
-      color:#fff;
-      padding:11px 30px;
-      border-radius:999px;
+      color:white;
       text-decoration:none;
       font-size:.9rem;
     }
 
     footer{
-      padding:30px 20px 50px;
-      text-align:center;
-      font-size:.8rem;
-      opacity:.75;
+      padding:40px 20px 60px;
+      font-size:.85rem;
+      color:#555;
     }
 
-    /* ===== MOBILE ===== */
-
     @media(max-width:600px){
-      .names{font-size:2.4rem;}
-      .nos-casamos{font-size:2rem;}
-      .date{font-size:1.9rem;}
-      h2{font-size:2rem;}
+      .names{font-size:2.6rem;}
+      .nos,.date{font-size:2rem;}
+      section{padding:36px 16px;}
     }
   </style>
 </head>
 
 <body>
 
-<section>
-  <div class="names">Flopi &amp; Goyo</div>
-  <div class="nos-casamos">¡Nos casamos!</div>
-  <div class="date">14.03.26</div>
-</section>
+  <!-- HEADER -->
+  <div class="names script">
+    Flopi <span class="amp">&amp;</span> Goyo
+  </div>
 
-<section>
-  <h2>Dónde y cuándo</h2>
+  <div class="nos script">¡Nos casamos!</div>
+  <div class="date script">14.03.26</div>
 
-  <div class="cards">
-    <div class="card">
-      <div class="icon">
-        <!-- Iglesia -->
-        <svg viewBox="0 0 24 24">
-          <path d="M12 3v6"></path>
-          <path d="M5 10h14v11H5z"></path>
-          <path d="M9 21v-6h6v6"></path>
-        </svg>
+  <!-- DONDE Y CUANDO -->
+  <section>
+    <h2 class="script">Dónde y cuándo</h2>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">⛪</div>
+        <h3>Ceremonia</h3>
+        <p>
+          Santa Rita, Bulogne<br>
+          <strong>16:30 hs</strong>
+        </p>
+        <a class="btn-outline" target="_blank"
+           href="https://www.google.com/maps/dir//Iglesia+Santa+Rita,+Darragueira+630,+Boulogne,+Buenos+Aires">
+          Ver ubicación
+        </a>
       </div>
-      <h3>Ceremonia</h3>
-      <p>Santa Rita<br><strong>16:30 hs</strong></p>
-      <a class="btn-outline" href="https://www.google.com/maps/dir//Iglesia+Santa+Rita,+Darragueira+630,+B1609+Boulogne,+Provincia+de+Buenos+Aires" target="_blank">
-        Ver ubicación
+
+      <div class="card">
+        <div class="icon">🍾</div>
+        <h3>Fiesta</h3>
+        <p>
+          Las Cortaderas, Pilar<br>
+          <strong>18:00 hs</strong>
+        </p>
+        <a class="btn-outline" target="_blank"
+           href="https://www.google.com/maps?daddr=J.+M.+Loreto+4600,+Dique+Luján,+Buenos+Aires">
+          Ver ubicación
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section>
+    <div class="cta">
+      <div class="icon">🔒</div>
+      <h3>RSVP</h3>
+      <a class="btn" href="PEGAR_LINK_FORM" target="_blank">
+        Confirmar asistencia
       </a>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="icon">
-        <!-- Botellas -->
-        <svg viewBox="0 0 24 24">
-          <path d="M8 3h2v4H8z"></path>
-          <path d="M14 3h2v4h-2z"></path>
-          <path d="M7 7h4v14H7z"></path>
-          <path d="M13 7h4v14h-4z"></path>
-        </svg>
-      </div>
-      <h3>Fiesta</h3>
-      <p>Las Cortaderas<br><strong>18:00 hs</strong></p>
-      <a class="btn-outline" href="https://www.google.com/maps?daddr=J.+M.+Loreto+4600,+Dique+Luj%C3%A1n,+Provincia+de+Buenos+Aires" target="_blank">
-        Ver ubicación
+  <!-- REGALOS -->
+  <section>
+    <div class="cta">
+      <div class="icon">🎁</div>
+      <h3>Regalos</h3>
+      <a class="btn" href="regalos.html">
+        Ver lista de regalos
       </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="cta">
-    <div class="icon">
-      <!-- Candado -->
-      <svg viewBox="0 0 24 24">
-        <rect x="5" y="11" width="14" height="10" rx="2"></rect>
-        <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-      </svg>
-    </div>
-    <h3>RSVP</h3>
-    <a href="#">Confirmar asistencia</a>
-  </div>
-
-  <div class="cta">
-    <div class="icon">
-      <!-- Regalo -->
-      <svg viewBox="0 0 24 24">
-        <path d="M3 10h18v11H3z"></path>
-        <path d="M12 10v11"></path>
-      </svg>
-    </div>
-    <h3>Regalos</h3>
-    <a href="regalos.html">Ver lista de regalos</a>
-  </div>
-
-  <div class="cta">
-    <div class="icon">
-      <!-- Bola disco -->
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="7"></circle>
-        <path d="M12 5v14M5 12h14"></path>
-      </svg>
-    </div>
-    <h3>Música</h3>
-    <a href="#">Ir a la playlist</a>
-  </div>
-</section>
-
-<footer>
-  Flopi &amp; Goyo · 14 de marzo de 2026
-</footer>
+  <footer>
+    Flopi & Goyo · 14 de marzo de 2026
+  </footer>
 
 </body>
 </html>
