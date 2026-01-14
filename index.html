@@ -17,11 +17,11 @@
 
   <style>
     :root{
-      --bg:#a9d7e8;
-      --card:#fff9f3;
-      --text:#2b2b2b;
+      --bg:#95c9e1;            /* celeste */
+      --card:#f8f5ec;          /* blanco */
+      --text:#322c2c;          /* negro */
       --muted:#6f6f6f;
-      --accent:#f28aa3;
+      --accent:#f28aa3;        /* rosa (igual) */
       --accent-soft:#fde4ec;
       --radius:22px;
       --shadow:0 18px 40px rgba(0,0,0,.08);
@@ -42,7 +42,7 @@
       padding:48px 20px;
     }
 
-    /* ===== TIPOGRAFÍA INVITACIÓN (SOLO DONDE VA) ===== */
+    /* ===== TIPOGRAFÍA INVITACIÓN ===== */
     .script{
       font-family:'Pacifico', cursive;
       font-weight:400;
@@ -52,7 +52,7 @@
     .names{
       font-size:3.2rem;
       margin-top:60px;
-      color:#000;
+      color:var(--text);
     }
 
     .names .amp{
@@ -68,7 +68,7 @@
     .date{
       font-size:2.4rem;
       margin-top:4px;
-      color:#000;
+      color:var(--text);
     }
 
     /* ===== TITULOS ===== */
@@ -106,7 +106,6 @@
     }
 
     .card h3{
-      font-family:'Inter',sans-serif;
       font-size:1.05rem;
       font-weight:500;
       margin-bottom:6px;
@@ -145,7 +144,7 @@
       padding:12px 30px;
       border-radius:30px;
       background:var(--accent);
-      color:white;
+      color:#f8f5ec;
       text-decoration:none;
       font-size:.9rem;
     }
@@ -153,7 +152,7 @@
     footer{
       padding:40px 20px 60px;
       font-size:.85rem;
-      color:#555;
+      color:var(--text);
     }
 
     @media(max-width:600px){
@@ -181,7 +180,7 @@
     <div class="cards">
       <div class="card">
         <div class="icon">⛪</div>
-        <h3>Ceremonia</h3>
+        <h3 class="script">Ceremonia</h3>
         <p>
           Santa Rita, Bulogne<br>
           <strong>16:30 hs</strong>
@@ -194,10 +193,10 @@
 
       <div class="card">
         <div class="icon">🍾</div>
-        <h3>Fiesta</h3>
+        <h3 class="script">Fiesta</h3>
         <p>
-          Las Cortaderas, Pilar<br>
-          <strong>18:00 hs</strong>
+          Las Cortaderas, Tigre<br>
+          <strong>18:30 hs</strong>
         </p>
         <a class="btn-outline" target="_blank"
            href="https://www.google.com/maps?daddr=J.+M.+Loreto+4600,+Dique+Luján,+Buenos+Aires">
@@ -211,8 +210,8 @@
   <section>
     <div class="cta">
       <div class="icon">🔒</div>
-      <h3>RSVP</h3>
-      <a class="btn" href="PEGAR_LINK_FORM" target="_blank">
+      <h3 class="script">RSVP</h3>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfL6H8sjPBOcxHk3zhMHj9iaTm5v9VEZv3AKKNAw7TRZ0kFKg/viewform" target="_blank">
         Confirmar asistencia
       </a>
     </div>
@@ -222,7 +221,7 @@
   <section>
     <div class="cta">
       <div class="icon">🎁</div>
-      <h3>Regalos</h3>
+      <h3 class="script">Regalos</h3>
       <a class="btn" href="regalos.html">
         Ver lista de regalos
       </a>
