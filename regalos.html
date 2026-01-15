@@ -13,13 +13,13 @@
   <!-- Tipografía personalizada -->
   <style>
     @font-face {
-  font-family: 'Goyofu';
-  src: url('fonts/Goyofu-Regular.woff2') format('woff2'),
-       url('fonts/Goyofu-Regular.ttf') format('truetype'),
-       url('fonts/Goyofu-Regular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
+      font-family: 'Goyofu';
+      src: url('fonts/Goyofu-Regular.woff2') format('woff2'),
+           url('fonts/Goyofu-Regular.ttf') format('truetype'),
+           url('fonts/Goyofu-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
   </style>
 
   <!-- PapaParse -->
@@ -50,15 +50,14 @@
     }
 
     .subtitle {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto 60px;
-  font-family: 'Goyofu', serif;
-  color: #f8f5ec;
-  font-size: 1.4rem;
-  line-height: 1.4;
-}
-
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+      font-family: 'Goyofu', serif;
+      color: #f8f5ec;
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
 
     /* FILTERS */
     .filters {
@@ -137,7 +136,7 @@
       font-size: .95rem;
     }
 
-    /* MODAL */
+    /* ===== MODAL (AJUSTADO) ===== */
     .modal {
       position: fixed;
       inset: 0;
@@ -146,6 +145,8 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
     }
 
     .modal.active {
@@ -156,12 +157,16 @@
       background: white;
       width: 95%;
       max-width: 520px;
+      max-height: 90vh;
       border-radius: 16px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-content {
       padding: 24px;
+      overflow-y: auto;
     }
 
     .modal-content img {
@@ -196,6 +201,7 @@
       gap: 10px;
       padding: 20px;
       border-top: 1px solid #eee;
+      background: white;
     }
 
     .modal-actions button {
@@ -222,9 +228,7 @@
 
 <h1>Lista de Regalos</h1>
 
-<p class="subtitle">
-  ¡Gracias por acompañarnos!
-</p>
+<p class="subtitle">¡Gracias por acompañarnos!</p>
 
 <div class="filters">
   <button class="active" onclick="filterCat('all', this)">Todos los regalos</button>
@@ -267,7 +271,8 @@
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQlgOl6z03yvVVdRTEDSDhKCOlO4axbcB02j9_0Y4uNKby_SCov9mViZORrqBO7diQ_E79EGcxvo-oA/pub?output=csv";
 
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform";
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform";
 
 let items = [];
 
