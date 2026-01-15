@@ -10,12 +10,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- Tipografía personalizada -->
+  <style>
+    @font-face {
+  font-family: 'Goyofu';
+  src: url('fonts/Goyofu-Regular.woff2') format('woff2'),
+       url('fonts/Goyofu-Regular.ttf') format('truetype'),
+       url('fonts/Goyofu-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+  </style>
+
   <!-- PapaParse -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <style>
     :root {
-      --bg: #faf9f7;
+      --bg: #95c9e1;
       --text: #2b2b2b;
       --muted: #777;
       --accent: #d6a6a1;
@@ -31,7 +43,7 @@
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Goyofu', serif;
       text-align: center;
       margin: 100px 0 20px;
       font-size: 2.8rem;
@@ -207,6 +219,7 @@
 <body>
 
 <h1>Lista de Regalos</h1>
+
 <p class="subtitle">
   Gracias por querer ser parte de nuestro comienzo.  
   Acá encontrarás diferentes opciones para ayudarnos a construir nuestro hogar y disfrutar de nuestra luna de miel.
@@ -286,7 +299,6 @@ function render(list) {
 function filterCat(cat, btn) {
   document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
-
   render(cat === "all" ? items : items.filter(i => i.Categoria === cat));
 }
 
