@@ -5,15 +5,21 @@
   <title>Flopi & Goyo — ¡Nos casamos!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Tipografías -->
+  <!-- Tipografías base -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Texto base -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Cursiva tipo invitación -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <!-- Tipografía personalizada -->
+  <style>
+    @font-face {
+      font-family: 'Goyofu';
+      src: url('fonts/Goyofu-Regular.ttf') format('truetype'),
+           url('fonts/Goyofu-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
 
   <style>
     :root{
@@ -21,8 +27,8 @@
       --card:#f8f5ec;
       --text:#322c2c;
       --muted:#6f6f6f;
-      --accent:#f28aa3;
-      --icon-bg:#cfeaf4; /* 👈 celeste pastel más claro */
+      --btn:#4d748c;
+      --icon-bg:#cfeaf4;
       --radius:22px;
       --shadow:0 18px 40px rgba(0,0,0,.08);
     }
@@ -42,7 +48,6 @@
       padding:48px 20px;
     }
 
-    /* ===== HERO ===== */
     .hero{
       max-width:1100px;
       margin:60px auto 20px;
@@ -51,12 +56,9 @@
 
     .hero img{
       width:100%;
-      height:auto;
-      display:block;
       border-radius:22px;
     }
 
-    /* ===== ICONOS ===== */
     .icon{
       width:54px;
       height:54px;
@@ -69,12 +71,11 @@
     }
 
     .icon img{
-      width:32px;
-      height:32px;
+      width:50px;
+      height:50px;
       object-fit:contain;
     }
 
-    /* ===== CARDS ===== */
     .cards{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -88,9 +89,10 @@
       box-shadow:var(--shadow);
     }
 
-    .card h3{
-      font-family:'Pacifico', cursive;
-      font-size:1.2rem;
+    .card h3,
+    .cta h3{
+      font-family:'Goyofu', serif;
+      font-size:1.3rem;
       font-weight:400;
       margin-bottom:6px;
     }
@@ -106,13 +108,12 @@
       margin-top:18px;
       padding:10px 22px;
       border-radius:30px;
-      border:1.5px solid var(--accent);
-      color:var(--accent);
+      border:1.5px solid var(--btn);
+      color:var(--btn);
       text-decoration:none;
       font-size:.9rem;
     }
 
-    /* ===== CTA ===== */
     .cta{
       background:var(--card);
       border-radius:var(--radius);
@@ -127,7 +128,7 @@
       margin-top:18px;
       padding:12px 30px;
       border-radius:30px;
-      background:var(--accent);
+      background:var(--btn);
       color:#f8f5ec;
       text-decoration:none;
       font-size:.9rem;
@@ -136,10 +137,8 @@
     footer{
       padding:40px 20px 60px;
       font-size:.85rem;
-      color:var(--text);
     }
 
-    /* ===== AJUSTE ESPACIO SOLO PRIMER BLOQUE ===== */
     .first-section{
       padding-top:24px;
     }
@@ -147,7 +146,6 @@
     @media(max-width:600px){
       section{padding:36px 16px;}
       .hero{margin-top:40px;}
-      .first-section{padding-top:16px;}
     }
   </style>
 </head>
@@ -168,10 +166,7 @@
           <img src="images/Floyo-Web-07.png" alt="Ceremonia">
         </div>
         <h3>Ceremonia</h3>
-        <p>
-          Santa Rita, Boulogne<br>
-          <strong>16:30 hs</strong>
-        </p>
+        <p>Santa Rita, Boulogne<br><strong>16:30 hs</strong></p>
         <a class="btn-outline" target="_blank"
            href="https://www.google.com/maps/dir//Iglesia+Santa+Rita,+Darragueira+630,+Boulogne,+Buenos+Aires">
           Ver ubicación
@@ -183,29 +178,13 @@
           <img src="images/Floyo-Web-05.png" alt="Fiesta">
         </div>
         <h3>Fiesta</h3>
-        <p>
-          Las Cortaderas, Tigre<br>
-          <strong>18:30 hs</strong>
-        </p>
+        <p>Las Cortaderas, Tigre<br><strong>18:30 hs</strong></p>
         <a class="btn-outline" target="_blank"
            href="https://www.google.com/maps?daddr=J.+M.+Loreto+4600,+Dique+Luján,+Buenos+Aires">
           Ver ubicación
         </a>
       </div>
 
-    </div>
-  </section>
-
-  <!-- RSVP -->
-  <section>
-    <div class="cta">
-      <div class="icon">
-        <img src="images/Floyo-Web-08.png" alt="RSVP">
-      </div>
-      <h3 style="font-family:'Pacifico', cursive;">RSVP</h3>
-      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfL6H8sjPBOcxHk3zhMHj9iaTm5v9VEZv3AKKNAw7TRZ0kFKg/viewform" target="_blank">
-        Confirmar asistencia
-      </a>
     </div>
   </section>
 
@@ -219,8 +198,21 @@
         Acuérdense que ese día hay <strong>Lollapalooza</strong>, tenganlo en cuenta por el tráfico.<br><br>
         El mejor camino para ir a Las Cortaderas desde Santa Rita es:
         <strong>Panamericana Ramal Escobar / Zárate</strong> y luego salir en
-        <strong>Ruta 27 (Av. Benavidez)</strong> hasta el fondo.
+        <strong>Ruta 27 (Av. Benavidez)</strong>.
       </p>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section>
+    <div class="cta">
+      <div class="icon">
+        <img src="images/Floyo-Web-08.png" alt="RSVP">
+      </div>
+      <h3>RSVP</h3>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfL6H8sjPBOcxHk3zhMHj9iaTm5v9VEZv3AKKNAw7TRZ0kFKg/viewform" target="_blank">
+        Confirmar asistencia
+      </a>
     </div>
   </section>
 
@@ -230,10 +222,8 @@
       <div class="icon">
         <img src="images/Floyo-Web-09.png" alt="Regalos">
       </div>
-      <h3 style="font-family:'Pacifico', cursive;">Regalos</h3>
-      <a class="btn" href="regalos.html">
-        Ver lista de regalos
-      </a>
+      <h3>Regalos</h3>
+      <a class="btn" href="regalos.html">Ver lista de regalos</a>
     </div>
   </section>
 
