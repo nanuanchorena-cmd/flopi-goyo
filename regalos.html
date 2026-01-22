@@ -29,7 +29,6 @@
     :root {
       --bg: #95c9e1;
       --text: #2b2b2b;
-      --muted: #777;
       --accent: #d6a6a1;
       --accent-soft: #f3e2df;
       --card: #ffffff;
@@ -51,12 +50,42 @@
 
     .subtitle {
       text-align: center;
-      max-width: 600px;
-      margin: 0 auto 80px;
+      max-width: 640px;
+      margin: 0 auto 40px;
       font-family: 'Goyofu', serif;
-      color: #f8f5ec;
+      color: #ffffff;
       font-size: 1.4rem;
-      line-height: 1.4;
+      line-height: 1.5;
+    }
+
+    /* 👇 BLOQUE DE CUENTAS – MISMA TIPOGRAFÍA QUE CEREMONIA */
+    .accounts {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+
+    .accounts strong {
+      display: block;
+      margin-top: 22px;
+      font-weight: 400;
+    }
+
+    /* 👇 TEXTO FINAL – MISMA TIPOGRAFÍA */
+    .after-text {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      max-width: 700px;
+      margin: 0 auto 80px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
     }
 
     .grid {
@@ -106,6 +135,8 @@
       cursor: pointer;
     }
 
+    /* MODAL */
+
     .modal {
       position: fixed;
       inset: 0;
@@ -125,12 +156,24 @@
       background: white;
       width: 95%;
       max-width: 520px;
+      max-height: 90vh;
       border-radius: 16px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-content {
       padding: 24px;
+      overflow-y: auto;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      max-height: 45vh;
+      object-fit: cover;
     }
 
     .bank-box {
@@ -158,8 +201,24 @@
 <h1>Lista de Regalos</h1>
 
 <p class="subtitle">
-  Nos encanta que nos acompañes y estés con nosotros en este día.
+  Nos encanta que nos acompañes y estés con nosotros en este día.<br>
   Si querés hacernos un regalo, podés hacerlo acá.
+</p>
+
+<div class="accounts">
+  <strong>Cuenta en pesos</strong>
+  CBU: 3840200500000047611421<br>
+  Alias: floyo.pesos<br>
+  Banco: Ualá
+
+  <strong>Cuenta en dólares</strong>
+  CBU: 3840200500000047612165<br>
+  Alias: floyo.usd<br>
+  Banco: Ualá
+</div>
+
+<p class="after-text">
+  Si preferís, acá pensamos algunas ideas de regalo para nuestra luna de miel en Japón
 </p>
 
 <div class="grid" id="grid"></div>
@@ -247,4 +306,5 @@ function confirmGift() {
 
 </body>
 </html>
+
 
