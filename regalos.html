@@ -58,11 +58,15 @@
       line-height: 1.5;
     }
 
-    /* CUENTAS – ROBOTO */
-    .accounts {
-      text-align: center;
+    .accounts,
+    .notify,
+    .after-text {
       font-family: 'Roboto', sans-serif;
       color: #ffffff;
+      text-align: center;
+    }
+
+    .accounts {
       max-width: 640px;
       margin: 0 auto 30px;
       font-size: 1.05rem;
@@ -75,17 +79,12 @@
       font-weight: 500;
     }
 
-    /* AVISAR */
     .notify {
-      text-align: center;
-      font-family: 'Roboto', sans-serif;
-      color: #ffffff;
       margin-bottom: 60px;
     }
 
     .notify p {
       margin-bottom: 16px;
-      font-size: 1rem;
     }
 
     .notify a {
@@ -95,19 +94,10 @@
       background: var(--accent-soft);
       color: var(--text);
       text-decoration: none;
-      font-size: 0.95rem;
       font-weight: 500;
     }
 
-    .notify a:hover {
-      opacity: 0.9;
-    }
-
-    /* TEXTO JAPÓN – ROBOTO */
     .after-text {
-      text-align: center;
-      font-family: 'Roboto', sans-serif;
-      color: #ffffff;
       max-width: 700px;
       margin: 0 auto 80px;
       font-size: 1.1rem;
@@ -126,8 +116,8 @@
     .card {
       background: var(--card);
       border-radius: 16px;
-      overflow: hidden;
       box-shadow: 0 10px 25px rgba(0,0,0,.05);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
@@ -153,13 +143,11 @@
 
     .card button {
       margin-top: auto;
-      width: 100%;
       padding: 12px;
       border-radius: 30px;
       border: none;
       background: var(--accent-soft);
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
       font-size: .95rem;
     }
 
@@ -180,10 +168,9 @@
     }
 
     .modal-box {
-      background: white;
-      width: 95%;
+      background: #fff;
       max-width: 520px;
-      max-height: 90vh;
+      width: 100%;
       border-radius: 16px;
       overflow: hidden;
       display: flex;
@@ -192,15 +179,6 @@
 
     .modal-content {
       padding: 24px;
-      overflow-y: auto;
-    }
-
-    .modal-content img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      max-height: 45vh;
-      object-fit: cover;
     }
 
     .bank-box {
@@ -225,8 +203,6 @@
       border: none;
       background: var(--accent-soft);
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: .95rem;
     }
   </style>
 </head>
@@ -265,6 +241,35 @@
 
 <div class="grid" id="grid"></div>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <div class="price" id="modalPrice"></div>
+
+      <div class="bank-box">
+        <strong>Cuenta en pesos</strong><br>
+        CBU: 3840200500000047611421<br>
+        Alias: floyo.pesos<br>
+        Banco: Ualá
+      </div>
+
+      <div class="bank-box">
+        <strong>Cuenta en dólares</strong><br>
+        CBU: 3840200500000047612165<br>
+        Alias: floyo.usd<br>
+        Banco: Ualá
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button onclick="closeModal()">Cancelar</button>
+      <button onclick="confirmGift()">Avisar regalo</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1gh3FMsghNK91BaWXp9oV6QRpOKucCIIqRrUU6JJoC5E/export?format=csv&gid=0";
@@ -283,13 +288,30 @@ Papa.parse(SHEET_URL, {
           <div class="card-content">
             <h3>${i.Producto}</h3>
             <div class="price">${i.Precio}</div>
-            <button>Regalar</button>
+            <button onclick='openModal(${JSON.stringify(i)})'>Regalar</button>
           </div>
         </div>
       `;
     });
   }
 });
+
+function openModal(item) {
+  document.getElementById("modalTitle").innerText = item.Producto;
+  document.getElementById("modalPrice").innerText = item.Precio;
+  document.getElementById("modal").classList.add("active");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("active");
+}
+
+function confirmGift() {
+  window.open(
+    "https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform",
+    "_blank"
+  );
+}
 </script>
 
 </body>
