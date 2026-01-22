@@ -1,309 +1,329 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Lista de Regalos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Lista de Regalos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Tipografías -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Tipografía personalizada -->
-  <style>
-    @font-face {
-      font-family: 'Goyofu';
-      src: url('fonts/Goyofu-Regular.woff2') format('woff2'),
-           url('fonts/Goyofu-Regular.ttf') format('truetype'),
-           url('fonts/Goyofu-Regular.otf') format('opentype');
-      font-weight: normal;
-      font-style: normal;
-    }
-  </style>
+  <!-- Tipografía personalizada -->
+  <style>
+    @font-face {
+      font-family: 'Goyofu';
+      src: url('fonts/Goyofu-Regular.woff2') format('woff2'),
+           url('fonts/Goyofu-Regular.ttf') format('truetype'),
+           url('fonts/Goyofu-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+  </style>
 
-  <!-- PapaParse -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <!-- PapaParse -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-  <style>
-    :root {
-      --bg: #95c9e1;
-      --text: #2b2b2b;
-      --muted: #777;
-      --accent: #d6a6a1;
-      --accent-soft: #f3e2df;
-      --card: #ffffff;
-    }
+  <style>
+    :root {
+      --bg: #95c9e1;
+      --text: #2b2b2b;
+      --muted: #777;
+      --accent: #d6a6a1;
+      --accent-soft: #f3e2df;
+      --card: #ffffff;
+    }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      margin: 0;
-      color: var(--text);
-    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
+    }
 
-    h1 {
-      font-family: 'Goyofu', serif;
-      text-align: center;
-      margin: 100px 0 20px;
-      font-size: 2.8rem;
-    }
+    h1 {
+      font-family: 'Goyofu', serif;
+      text-align: center;
+      margin: 100px 0 20px;
+      font-size: 2.8rem;
+    }
 
-    .subtitle {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 60px;
-      font-family: 'Goyofu', serif;
-      color: #f8f5ec;
-      font-size: 1.4rem;
-      line-height: 1.4;
-    }
+    .subtitle {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 60px;
+      font-family: 'Goyofu', serif;
+      color: #f8f5ec;
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
 
-    .filters {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+    /* FILTERS */
+    .filters {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-    .filters button {
-      border: none;
-      background: #eee;
-      padding: 10px 22px;
-      margin: 6px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: .9rem;
-    }
+    .filters button {
+      border: none;
+      background: #eee;
+      padding: 10px 22px;
+      margin: 6px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .9rem;
+    }
 
-    .filters button.active {
-      background: var(--accent-soft);
-      color: var(--text);
-    }
+    .filters button.active {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
 
-    .grid {
-      max-width: 1200px;
-      margin: 0 auto 120px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
+    /* GRID */
+    .grid {
+      max-width: 1200px;
+      margin: 0 auto 120px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
 
-    .card {
-      background: var(--card);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,.05);
-      display: flex;
-      flex-direction: column;
-    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,.05);
+      display: flex;
+      flex-direction: column;
+    }
 
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
 
-    .card-content {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
+    .card-content {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-    .card-content h3 {
-      font-family: 'Playfair Display', serif;
-      margin: 0 0 8px;
-      font-size: 1.2rem;
-    }
+    .card-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
 
-    .price {
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
+    .price {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
 
-    .card button {
-      margin-top: auto;
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 30px;
-      background: var(--accent-soft);
-      cursor: pointer;
-      font-size: .95rem;
-    }
+    .card button {
+      margin-top: auto;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      background: var(--accent-soft);
+      cursor: pointer;
+      font-size: .95rem;
+    }
 
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.4);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
-    }
+    /* ===== MODAL (AJUSTADO) ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+    }
 
-    .modal.active {
-      display: flex;
-    }
+    .modal.active {
+      display: flex;
+    }
 
-    .modal-box {
-      background: white;
-      width: 95%;
-      max-width: 520px;
-      border-radius: 16px;
-      overflow: hidden;
-    }
+    .modal-box {
+      background: white;
+      width: 95%;
+      max-width: 520px;
+      max-height: 90vh;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-    .modal-content {
-      padding: 24px;
-    }
+    .modal-content {
+      padding: 24px;
+      overflow-y: auto;
+    }
 
-    .modal-content img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
 
-    .modal-price {
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
+    .modal-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 10px;
+    }
 
-    .bank-box {
-      background: #f6f6f6;
-      padding: 16px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      font-size: .9rem;
-      color: var(--muted);
-    }
+    .modal-price {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
 
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      padding: 20px;
-      border-top: 1px solid #eee;
-    }
+    .bank-box {
+      background: #f6f6f6;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
 
-    .modal-actions button {
-      flex: 1;
-      padding: 12px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-size: .9rem;
-    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      border-top: 1px solid #eee;
+      background: white;
+    }
 
-    .cancel { background: #eee; }
-    .confirm { background: var(--accent); color: white; }
-  </style>
+    .modal-actions button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .cancel {
+      background: #eee;
+    }
+
+    .confirm {
+      background: var(--accent);
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
 
 <h1>Lista de Regalos</h1>
 
-<p class="subtitle">
-  Nos encanta que nos acompañes y estés con nosotros en este dia.<br>
-  Si querés hacernos un regalo, podés hacerlo acá.
-</p>
+<p class="subtitle">Nos encanta que nos acompañes y estés con nosotros en este día.
+Si querés hacernos un regalo, podes hacerlo acá.</p>
 
 <div class="filters">
-  <button class="active" onclick="filterCat('all', this)">Todos los regalos</button>
-  <button onclick="filterCat('Hogar', this)">Hogar</button>
-  <button onclick="filterCat('Luna de Miel', this)">Luna de Miel</button>
-  <button onclick="filterCat('Experiencias', this)">Experiencias</button>
+  <button class="active" onclick="filterCat('all', this)">Todos los regalos</button>
+  <button onclick="filterCat('Hogar', this)">Hogar</button>
+  <button onclick="filterCat('Luna de Miel', this)">Luna de Miel</button>
+  <button onclick="filterCat('Experiencias', this)">Experiencias</button>
 </div>
 
 <div class="grid" id="grid"></div>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
-  <div class="modal-box">
-    <div class="modal-content">
-      <img id="modalImg">
-      <h3 id="modalTitle"></h3>
-      <div class="modal-price" id="modalPrice"></div>
+  <div class="modal-box">
+    <div class="modal-content">
+      <img id="modalImg">
+      <h3 id="modalTitle"></h3>
+      <div class="modal-price" id="modalPrice"></div>
 
-      <div class="bank-box">
-        <strong>Cuenta en ARS</strong><br>
-        Alias: floyo.pesos<br>
-        Banco: Ualá<br>
-        CBU: 3840200500000047611421
-      </div>
+      <div class="bank-box">
+  <strong>Cuenta en ARS</strong><br>
+  Alias: floyo.pesos<br>
+  Banco: Ualá<br>
+  CBU: 3840200500000047611421
+</div>
 
-      <div class="bank-box">
-        <strong>Cuenta en USD</strong><br>
-        Alias: floyo.usd<br>
-        Banco: Ualá<br>
-        CBU: 3840200500000047612165
-      </div>
-    </div>
+<div class="bank-box">
+  <strong>Cuenta en USD</strong><br>
+  Alias: floyo.usd<br>
+  Banco: Ualá<br>
+  CBU: 3840200500000047612165
+</div>
 
-    <div class="modal-actions">
-      <button class="cancel" onclick="closeModal()">Cancelar</button>
-      <button class="confirm" onclick="confirmGift()">Confirmar regalo</button>
-    </div>
-  </div>
+
+    <div class="modal-actions">
+      <button class="cancel" onclick="closeModal()">Cancelar</button>
+      <button class="confirm" onclick="confirmGift()">Confirmar regalo</button>
+    </div>
+  </div>
 </div>
 
 <script>
 const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/e/1gh3FMsghNK91BaWXp9oV6QRpOKucCIIqRrUU6JJoC5E/pub?output=csv";
+  "https://docs.google.com/spreadsheets/d/1gh3FMsghNK91BaWXp9oV6QRpOKucCIIqRrUU6JJoC5E/edit?gid=0#gid=0";
 
 const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform";
+  "https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform";
 
 let items = [];
 
 Papa.parse(SHEET_URL, {
-  download: true,
-  header: true,
-  complete: res => {
-    items = res.data.filter(i => i.Producto);
-    render(items);
-  }
+  download: true,
+  header: true,
+  complete: res => {
+    items = res.data.filter(i => i.Producto);
+    render(items);
+  }
 });
 
 function render(list) {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-  list.forEach(i => {
-    grid.innerHTML += `
-      <div class="card">
-        <img src="images/${i.Foto}">
-        <div class="card-content">
-          <h3>${i.Producto}</h3>
-          <div class="price">${i.Precio}</div>
-          <button onclick='openModal(${JSON.stringify(i)})'>Regalar</button>
-        </div>
-      </div>`;
-  });
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  list.forEach(i => {
+    grid.innerHTML += `
+      <div class="card">
+        <img src="images/${i.Foto}">
+        <div class="card-content">
+          <h3>${i.Producto}</h3>
+          <div class="price">${i.Precio}</div>
+          <button onclick='openModal(${JSON.stringify(i)})'>Regalar</button>
+        </div>
+      </div>`;
+  });
 }
 
 function filterCat(cat, btn) {
-  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  render(cat === "all" ? items : items.filter(i => i.Categoria === cat));
+  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  render(cat === "all" ? items : items.filter(i => i.Categoria === cat));
 }
 
 function openModal(item) {
-  document.getElementById("modalImg").src = "images/" + item.Foto;
-  document.getElementById("modalTitle").innerText = item.Producto;
-  document.getElementById("modalPrice").innerText = item.Precio;
-  document.getElementById("modal").classList.add("active");
+  document.getElementById("modalImg").src = "images/" + item.Foto;
+  document.getElementById("modalTitle").innerText = item.Producto;
+  document.getElementById("modalPrice").innerText = item.Precio;
+  document.getElementById("modal").classList.add("active");
 }
 
 function closeModal() {
-  document.getElementById("modal").classList.remove("active");
+  document.getElementById("modal").classList.remove("active");
 }
 
 function confirmGift() {
-  window.open(GOOGLE_FORM_URL, "_blank");
+  window.open(GOOGLE_FORM_URL, "_blank");
 }
 </script>
 
