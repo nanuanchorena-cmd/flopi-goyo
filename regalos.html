@@ -8,7 +8,7 @@
   <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <!-- Tipografía personalizada -->
   <style>
@@ -58,32 +58,60 @@
       line-height: 1.5;
     }
 
+    /* CUENTAS – ROBOTO */
     .accounts {
       text-align: center;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Roboto', sans-serif;
       color: #ffffff;
       max-width: 640px;
-      margin: 0 auto 40px;
+      margin: 0 auto 30px;
       font-size: 1.05rem;
       line-height: 1.7;
-      letter-spacing: 0.02em;
     }
 
     .accounts strong {
       display: block;
       margin-top: 22px;
-      font-weight: 400;
+      font-weight: 500;
     }
 
+    /* AVISAR */
+    .notify {
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+      color: #ffffff;
+      margin-bottom: 60px;
+    }
+
+    .notify p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    .notify a {
+      display: inline-block;
+      padding: 12px 30px;
+      border-radius: 30px;
+      background: var(--accent-soft);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .notify a:hover {
+      opacity: 0.9;
+    }
+
+    /* TEXTO JAPÓN – ROBOTO */
     .after-text {
       text-align: center;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Roboto', sans-serif;
       color: #ffffff;
       max-width: 700px;
       margin: 0 auto 80px;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       line-height: 1.6;
-      letter-spacing: 0.02em;
     }
 
     .grid {
@@ -136,7 +164,6 @@
     }
 
     /* MODAL */
-
     .modal {
       position: fixed;
       inset: 0;
@@ -184,7 +211,6 @@
       font-size: .9rem;
     }
 
-    /* 👇 BOTONES DEL MODAL = BOTÓN "REGALAR" */
     .modal-actions {
       display: flex;
       gap: 12px;
@@ -201,10 +227,6 @@
       cursor: pointer;
       font-family: 'Inter', sans-serif;
       font-size: .95rem;
-    }
-
-    .modal-actions button:hover {
-      opacity: 0.9;
     }
   </style>
 </head>
@@ -230,91 +252,44 @@
   Banco: Ualá
 </div>
 
+<div class="notify">
+  <p>Avisanos así te agradecemos</p>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform" target="_blank">
+    Avisar
+  </a>
+</div>
+
 <p class="after-text">
   Si preferís, acá pensamos algunas ideas de regalo para nuestra luna de miel en Japón
 </p>
 
 <div class="grid" id="grid"></div>
 
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <div class="modal-content">
-      <img id="modalImg">
-      <h3 id="modalTitle"></h3>
-      <div class="modal-price" id="modalPrice"></div>
-
-      <div class="bank-box">
-        <strong>Cuenta en ARS</strong><br>
-        Alias: floyo.pesos<br>
-        Banco: Ualá<br>
-        CBU: 3840200500000047611421
-      </div>
-
-      <div class="bank-box">
-        <strong>Cuenta en USD</strong><br>
-        Alias: floyo.usd<br>
-        Banco: Ualá<br>
-        CBU: 3840200500000047612165
-      </div>
-    </div>
-
-    <div class="modal-actions">
-      <button onclick="closeModal()">Cancelar</button>
-      <button onclick="confirmGift()">Confirmar regalo</button>
-    </div>
-  </div>
-</div>
-
 <script>
 const SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1gh3FMsghNK91BaWXp9oV6QRpOKucCIIqRrUU6JJoC5E/export?format=csv&gid=0";
-
-const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSeWHcrq75P5hF2Bnf5kzrpdNKByvzg7dsTc8onZhrXQ3w_ndQ/viewform";
-
-let items = [];
 
 Papa.parse(SHEET_URL, {
   download: true,
   header: true,
   complete: res => {
-    items = res.data.filter(i => i.Producto);
-    render(items);
+    const items = res.data.filter(i => i.Producto);
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+    items.forEach(i => {
+      grid.innerHTML += `
+        <div class="card">
+          <img src="images/${i.Foto}">
+          <div class="card-content">
+            <h3>${i.Producto}</h3>
+            <div class="price">${i.Precio}</div>
+            <button>Regalar</button>
+          </div>
+        </div>
+      `;
+    });
   }
 });
-
-function render(list) {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-
-  list.forEach(i => {
-    grid.innerHTML += `
-      <div class="card">
-        <img src="images/${i.Foto}">
-        <div class="card-content">
-          <h3>${i.Producto}</h3>
-          <div class="price">${i.Precio}</div>
-          <button onclick='openModal(${JSON.stringify(i)})'>Regalar</button>
-        </div>
-      </div>
-    `;
-  });
-}
-
-function openModal(item) {
-  document.getElementById("modalImg").src = "images/" + item.Foto;
-  document.getElementById("modalTitle").innerText = item.Producto;
-  document.getElementById("modalPrice").innerText = item.Precio;
-  document.getElementById("modal").classList.add("active");
-}
-
-function closeModal() {
-  document.getElementById("modal").classList.remove("active");
-}
-
-function confirmGift() {
-  window.open(GOOGLE_FORM_URL, "_blank");
-}
 </script>
 
 </body>
